@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Fiche de jeu";
+}
+
+<div class="fiche">
+<img src="~/images/imagesCarousel/@ViewBag.Image" alt="imageDuJeu" style="width:100%">
+</div>
+
+<p class="texteFiche"><b>Nom du jeu: </b>@ViewBag.NomDuJeu</p>
+<p class="texteFiche"><b>Type de jeu: </b>@ViewBag.TypeDeJeu</p>
+<p class="texteFiche"><b>Cote: </b>@ViewBag.EvaluationCote</p>
+<p class="texteFiche"><b>Description: </b>@ViewBag.EvaluationDescription</p>
+<p class="texteFiche"><b>Date de production: </b>@ViewBag.DateProduction</p>
+<p class="texteFiche"><b>Duree: </b>@ViewBag.Duree</p>
+<p class="texteFiche"><b>Auteur: </b>@ViewBag.Auteur</p>
+<p class="texteFiche"><b>Producteur: </b>@ViewBag.Producteur</p>
+
+<div class="texteFiche">
+    <b>Extrait: </b>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="@ViewBag.Extrait" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="texteFiche nav-link">
+    <b>Complet: </b>
+    <a class="texteFiche" href="@ViewBag.Complet">@ViewBag.Complet</a>
+</div>
+
+<div class="divFavori">
+    <a class="btn btn-primary" href="@Url.Action("SupprimerDesFavoris","Home", new {id=@ViewBag.Id, nomDuJeu=@ViewBag.NomDuJeu})">Supprimer des favoris</a>
+</div>
