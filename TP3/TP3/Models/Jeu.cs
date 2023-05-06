@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-
-namespace TP2.Models
+﻿
+namespace TP3.Models
 {
     public class Jeu
     {
