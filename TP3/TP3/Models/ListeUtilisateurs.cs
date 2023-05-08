@@ -3,11 +3,9 @@ namespace TP3.Models
 {
     public class ListeUtilisateurs
     {
+        public int IdListeUtilisateur;
+
         private  List<Utilisateur> liste;
-
-        
-
-      
 
         //Retourne false si l'utilisateur ne peut pas etre creer
         public bool CreerUtilisateur(string identifiantUnique,string pseudo, string motDePasse, string nom, string prenom, string emplacementFichier = "")
@@ -50,7 +48,7 @@ namespace TP3.Models
             do
             {
                 utilisateurATester = this.liste[i];
-                trouve = utilisateurATester.IdentifiantUnique == identifiantUnique;
+                trouve = utilisateurATester.IDUtilisateur == identifiantUnique;
                 i++;
             }
             while (!trouve && i < liste.Count - 1);
@@ -61,7 +59,7 @@ namespace TP3.Models
 
             //Ajout de l'utilisateur
             Utilisateur utilisateur = new Utilisateur();
-            utilisateur.IdentifiantUnique = identifiantUnique;
+            utilisateur.IDUtilisateur = identifiantUnique;
             utilisateur.Pseudo = pseudo;
             utilisateur.MotDePasse = motDePasse;
             utilisateur.Prenom = prenom;
