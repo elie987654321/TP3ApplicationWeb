@@ -1,7 +1,12 @@
-﻿namespace TP3.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TP3.Models
 {
     public class Evaluation
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IdEvaluation;
+
         // Enumeration
         public enum CoteDeJeu
         {
@@ -12,29 +17,17 @@
             MAUVAIS = 1
         }
 
-        // Attributs
-        private CoteDeJeu cote;
-        private string description;
 
-        public CoteDeJeu Cote { get => cote; set => cote = value; }
-        public string Description { get => description; set => description = value; }
+        public int Cote { get; set; }
 
-        // Constructeur par defaut
-        public Evaluation()
+
+        public string Description { get; set ; }
+
+    
+        public CoteDeJeu CoteAsEnum()
         {
-            this.Cote = new CoteDeJeu();
-            this.Description = "";
+            return (CoteDeJeu)this.Cote;
         }
-
-
-        // Constructeur complet
-        public Evaluation(CoteDeJeu cote, string description)
-        {
-            this.Cote = cote;
-            this.Description = description;
-        }
-
-
 
         // ToString
         public override string ToString()

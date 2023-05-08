@@ -6,3 +6,11 @@ C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0
 C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.RazorAssemblyInfo.cache
 C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.RazorAssemblyInfo.cs
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.csproj.AssemblyReference.cache
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.AssemblyInfoInputs.cache
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.AssemblyInfo.cs
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.csproj.CoreCompileInputs.cache
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.RazorAssemblyInfo.cache
+C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\obj\Debug\net6.0\TP3.RazorAssemblyInfo.cs
