@@ -17,7 +17,7 @@ namespace TP3.Models
             Crime
         }
 
-        public int IdJeu;
+        public int IDJeu;
 
         // Accesseurs et mutateurs
         public string NomDuJeu { get; set ; }
@@ -31,6 +31,7 @@ namespace TP3.Models
         public string Complet { get ; set ; }
         public string Image { get ; set ; }
 
+        public ICollection<Evaluation> evaluations { get ; set ; }
 
         public List<int> EvaluationMoyenne { get ; set ; }
         

@@ -3,7 +3,7 @@ namespace TP3.Models
 {
     public class ListeUtilisateurs
     {
-        public int IdListeUtilisateur;
+        public int IDListeUtilisateur;
 
         private  List<Utilisateur> liste;
 
@@ -65,10 +65,7 @@ namespace TP3.Models
             utilisateur.Prenom = prenom;
             utilisateur.Nom = nom;
             
-            //TODO gerer ça avec entity
-            //this.AjouterUtilisateur(utilisateur);
-            //this.Sauvegarder(emplacementFichier == "" ? Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json" : emplacementFichier);
-
+           
             return true;
         }
 

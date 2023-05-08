@@ -5,7 +5,7 @@ namespace TP3.Models
     public class Evaluation
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdEvaluation;
+        public int IDEvaluation;
 
         // Enumeration
         public enum CoteDeJeu

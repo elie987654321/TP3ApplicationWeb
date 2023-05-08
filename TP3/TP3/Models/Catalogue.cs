@@ -3,10 +3,10 @@ namespace TP3.Models
 {
     public class Catalogue
     {
-        public int IdCatalogue;
+        public int IDCatalogue;
 
         // Attribut
-        public List<Jeu> ListeDeJeux { get; set; }
+        public ICollection<Jeu> ListeDeJeux { get; set; }
 
 
 
