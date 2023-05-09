@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/views/shared/_LayoutConnexion.cshtml";
+}
+
+<form class="formCreerCompte" asp-controller="Connexion">
+   <div class="form-group w-25">
+        <label for="identifiantUnique">Identifiant unique</label>
+        <input class="form-control" placeholder="Identifiant unique" required type="text" id="identifiantUnique" name="identifiantUnique"/>
+    </div>
+    <br/>
+    <div class="form-group w-25">
+        <label for="pseudo">Pseudonyme</label>
+        <input class="form-control" placeholder="Pseudonyme" required type="text" id="pseudo" name="pseudo"/>
+    </div>
+    <br/>
+    <div class="form-group w-25">
+        <label for="prenom">Prénom</label>
+        <input class="form-control" placeholder="Prénom" required type="text" id="prenom" name="prenom"/>
+    </div>
+    <br/>
+    <div class="form-group w-25">
+        <label for="nom">Nom</label>
+        <input class="form-control" placeholder="Nom" required type="text" id="nom" name="nom"/>
+    </div>
+    <br/>
+    <div class="form-group w-25">
+        <label for="password">Mot de passe</label>
+        <input class="form-control" placeholder="Mot de passe" required type="password" id="password" name="password"/>
+    </div>        <br/>
+    <div class="form-group w-25">
+        <input type="submit" value="Créer le compte"  asp-action="CreerCompte" />
+    </div>
+</form>

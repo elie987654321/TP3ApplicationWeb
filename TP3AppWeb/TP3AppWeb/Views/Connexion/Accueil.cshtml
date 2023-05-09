@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/views/shared/_LayoutConnexion.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row rowAccueilNonConnecter">
+        <div class="col-3 infoAccueil">
+            <div class="container">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <h2>Hogward legacy maintenant disponible!!!</h2>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p>Une fermeture du site pour des raisons de maintenance aura lieu mercredi prochain</p>
+            </div>
+        </div>
+        <div class="col-9">
+            <p class="bienvnue">Bienvenue sur JeuxVideoMania votre catalogue de jeux vidéo</p>
+            <form asp-controller="Connexion" >            
+                <p style="color:red">@Html.Raw(ViewBag.message)</p>
+                <div class="form-group w-25">
+                    <label for="identifiantUnique">Nom d'utilisateur</label>
+                    <input class="form-control" type="text" id="identifiantUnique" name="identifiantUnique"/>
+                </div>
+                
+                <div class="form-group w-25">
+                <label for="motDePasse">Mot de passe</label>
+                <input class="form-control" type="password" id="motDePasse" name="motDePasse"/>
+                </div>
+
+                <div class="form-group w-25 connexiion">
+                    <input type="submit" value="Se connecter" asp-action="Connexion"/>
+                </div>
+                
+            </form>
+            <p>@Html.ActionLink("Créer un compte", "CreerCompte")</p>
+            <br/>
+            <br/>
+            <p>Pour recuperer un mot de passe perdu, contacter l'administrateur a bobbob44@gmail.com</p>            
+        <div class="footerAccueilNonConnecte">
+             <h1>@ViewBag.Role</h1>
+        </div>
+    </div>
+</div>

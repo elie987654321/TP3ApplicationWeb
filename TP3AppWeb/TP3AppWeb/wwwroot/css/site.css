@@ -1,0 +1,133 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+img {
+    padding-right: 10px;
+}
+
+.carousel .item {
+    height: 300px;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+#deconnecter {
+    border: solid 1px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+    border: solid 2px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.liste {
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.fiche {
+    width: 50%;
+    height: 100%;
+    padding-bottom: 20px;
+}
+
+.texteFiche {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+}
+
+.texteListe {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 80px;
+}
+
+.divFavori {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.ajouteFavori {
+    width: 25%;
+    font-size: 30px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+}
+
+
+.infoAccueil {
+    background-color: lightblue;
+}
+
+
+.rowAccueilNonConnecter {
+    height: 900px;
+}
+
+.footerAccueilNonConnecte {
+    position: absolute;
+    bottom: 100px;
+}
+
+.formCreerCompte {
+    position: relative;
+    top: 40%;
+    left: 36%;
+}
+
+.bg-image {
+    background-image: url('../images/backgroundConnexion.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.bodyConnexion {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.connexiion {
+    padding-top: 10px;
+}
+
+.bienvnue {
+    font-size: 40px;
+}
+
+.admin {
+    font-size: 40px;
+}
