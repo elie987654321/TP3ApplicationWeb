@@ -12,7 +12,7 @@ using TP3AppWeb.Models;
 namespace TP3AppWeb.Migrations
 {
     [DbContext(typeof(TP3Context))]
-    [Migration("20230510203503_InitialMig")]
+    [Migration("20230510221453_InitialMig")]
     partial class InitialMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,68 @@ namespace TP3AppWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("JeuUtilisateur", b =>
+                {
+                    b.Property<int>("FavorisEvaluationID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtilisateursUtilisateurID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FavorisEvaluationID", "UtilisateursUtilisateurID");
+
+                    b.HasIndex("UtilisateursUtilisateurID");
+
+                    b.ToTable("JeuUtilisateur");
+
+                    b.HasData(
+                        new
+                        {
+                            FavorisEvaluationID = 10,
+                            UtilisateursUtilisateurID = 1
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 2,
+                            UtilisateursUtilisateurID = 1
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 8,
+                            UtilisateursUtilisateurID = 1
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 10,
+                            UtilisateursUtilisateurID = 2
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 3,
+                            UtilisateursUtilisateurID = 2
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 1,
+                            UtilisateursUtilisateurID = 2
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 4,
+                            UtilisateursUtilisateurID = 3
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 1,
+                            UtilisateursUtilisateurID = 3
+                        },
+                        new
+                        {
+                            FavorisEvaluationID = 6,
+                            UtilisateursUtilisateurID = 3
+                        });
+                });
 
             modelBuilder.Entity("TP3AppWeb.Models.Evaluation", b =>
                 {
@@ -145,12 +207,7 @@ namespace TP3AppWeb.Migrations
                     b.Property<int>("TypeDeJeu")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UtilisateurID")
-                        .HasColumnType("int");
-
                     b.HasKey("EvaluationID");
-
-                    b.HasIndex("UtilisateurID");
 
                     b.ToTable("Jeu", (string)null);
 
@@ -362,6 +419,21 @@ namespace TP3AppWeb.Migrations
                         });
                 });
 
+            modelBuilder.Entity("JeuUtilisateur", b =>
+                {
+                    b.HasOne("TP3AppWeb.Models.Jeu", null)
+                        .WithMany()
+                        .HasForeignKey("FavorisEvaluationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TP3AppWeb.Models.Utilisateur", null)
+                        .WithMany()
+                        .HasForeignKey("UtilisateursUtilisateurID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TP3AppWeb.Models.Jeu", b =>
                 {
                     b.HasOne("TP3AppWeb.Models.Evaluation", "Evaluation")
@@ -370,16 +442,7 @@ namespace TP3AppWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TP3AppWeb.Models.Utilisateur", null)
-                        .WithMany("Favoris")
-                        .HasForeignKey("UtilisateurID");
-
                     b.Navigation("Evaluation");
-                });
-
-            modelBuilder.Entity("TP3AppWeb.Models.Utilisateur", b =>
-                {
-                    b.Navigation("Favoris");
                 });
 #pragma warning restore 612, 618
         }

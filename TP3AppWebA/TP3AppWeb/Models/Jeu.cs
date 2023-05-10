@@ -36,6 +36,7 @@ namespace TP3AppWeb.Models
         public string Image { get; set; }
 
         public virtual Evaluation Evaluation { get; set; }
+        public virtual ICollection<Utilisateur> Utilisateurs { get; set; }
 
     }
 }

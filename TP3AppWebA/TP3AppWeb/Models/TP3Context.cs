@@ -54,10 +54,88 @@ namespace TP3AppWeb.Models
                 );
 
             modelBuilder.Entity<Utilisateur>().HasData(
-                new Utilisateur { UtilisateurID = 1, IdentifiantUnique = "bob123", Pseudo = "Bobby", MotDePasse = "secret", Nom = "Bobob", Prenom = "Bob", Role = RoleDUtilisateur.Admin, Favoris = new List<Jeu>() },
-                new Utilisateur { UtilisateurID = 2, IdentifiantUnique = "gerry321", Pseudo = "Muffin", MotDePasse = "mdp123", Nom = "Tremblay", Prenom = "George", Role = RoleDUtilisateur.Utilisateur, Favoris = new List<Jeu>() },
-                new Utilisateur { UtilisateurID = 3, IdentifiantUnique = "joejoe546", Pseudo = "Joejoe", MotDePasse = "Soleil01", Nom = "Jean", Prenom = "Joe", Role = RoleDUtilisateur.Utilisateur, Favoris = new List<Jeu>() }
+                new Utilisateur { UtilisateurID = 1, IdentifiantUnique = "bob123", Pseudo = "Bobby", MotDePasse = "secret", Nom = "Bobob", Prenom = "Bob", Role = RoleDUtilisateur.Admin },
+                new Utilisateur { UtilisateurID = 2, IdentifiantUnique = "gerry321", Pseudo = "Muffin", MotDePasse = "mdp123", Nom = "Tremblay", Prenom = "George" },
+                new Utilisateur { UtilisateurID = 3, IdentifiantUnique = "joejoe546", Pseudo = "Joejoe", MotDePasse = "Soleil01", Nom = "Jean", Prenom = "Joe" }
                 );
+
+            // Favoris de Bob
+            modelBuilder.Entity<Jeu>()
+                .HasMany(jeu => jeu.Utilisateurs)
+                .WithMany(jeu => jeu.Favoris)
+                .UsingEntity(jeu => jeu.HasData(
+                    new
+                    {
+                        JeuID = 10,
+                        UtilisateursUtilisateurID = 1,
+                        FavorisEvaluationID = 10
+                    },
+                    new
+                    {
+                        JeuID = 2,
+                        UtilisateursUtilisateurID = 1,
+                        FavorisEvaluationID = 2
+                    },
+                    new
+                    {
+                        JeuID = 8,
+                        UtilisateursUtilisateurID = 1,
+                        FavorisEvaluationID = 8
+                    }
+                )
+            );
+
+            // Favoris de Gerry
+            modelBuilder.Entity<Jeu>()
+                .HasMany(jeu => jeu.Utilisateurs)
+                .WithMany(jeu => jeu.Favoris)
+                .UsingEntity(jeu => jeu.HasData(
+                    new
+                    {
+                        JeuID = 10,
+                        UtilisateursUtilisateurID = 2,
+                        FavorisEvaluationID = 10
+                    },
+                    new
+                    {
+                        JeuID = 3,
+                        UtilisateursUtilisateurID = 2,
+                        FavorisEvaluationID = 3
+                    },
+                    new
+                    {
+                        JeuID = 1,
+                        UtilisateursUtilisateurID = 2,
+                        FavorisEvaluationID = 1
+                    }
+                )
+            );
+
+            // Favoris de Joe
+            modelBuilder.Entity<Jeu>()
+                .HasMany(jeu => jeu.Utilisateurs)
+                .WithMany(jeu => jeu.Favoris)
+                .UsingEntity(jeu => jeu.HasData(
+                    new
+                    {
+                        JeuID = 4,
+                        UtilisateursUtilisateurID = 3,
+                        FavorisEvaluationID = 4
+                    },
+                    new
+                    {
+                        JeuID = 1,
+                        UtilisateursUtilisateurID = 3,
+                        FavorisEvaluationID = 1
+                    },
+                    new
+                    {
+                        JeuID = 6,
+                        UtilisateursUtilisateurID = 3,
+                        FavorisEvaluationID = 6
+                    }
+                )
+            );
 
             base.OnModelCreating(modelBuilder);
         }

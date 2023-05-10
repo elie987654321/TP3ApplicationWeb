@@ -53,8 +53,7 @@ namespace TP3AppWeb.Migrations
                     Producteur = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Extrait = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Complet = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UtilisateurID = table.Column<int>(type: "int", nullable: true)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,11 +64,30 @@ namespace TP3AppWeb.Migrations
                         principalTable: "Evaluation",
                         principalColumn: "EvaluationID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JeuUtilisateur",
+                columns: table => new
+                {
+                    FavorisEvaluationID = table.Column<int>(type: "int", nullable: false),
+                    UtilisateursUtilisateurID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JeuUtilisateur", x => new { x.FavorisEvaluationID, x.UtilisateursUtilisateurID });
                     table.ForeignKey(
-                        name: "FK_Jeu_Utilisateur_UtilisateurID",
-                        column: x => x.UtilisateurID,
+                        name: "FK_JeuUtilisateur_Jeu_FavorisEvaluationID",
+                        column: x => x.FavorisEvaluationID,
+                        principalTable: "Jeu",
+                        principalColumn: "EvaluationID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JeuUtilisateur_Utilisateur_UtilisateursUtilisateurID",
+                        column: x => x.UtilisateursUtilisateurID,
                         principalTable: "Utilisateur",
-                        principalColumn: "UtilisateurID");
+                        principalColumn: "UtilisateurID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -101,37 +119,56 @@ namespace TP3AppWeb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Jeu",
-                columns: new[] { "EvaluationID", "Auteur", "Complet", "DateProduction", "Duree", "Extrait", "Image", "JeuID", "NomDuJeu", "Producteur", "TypeDeJeu", "UtilisateurID" },
+                columns: new[] { "EvaluationID", "Auteur", "Complet", "DateProduction", "Duree", "Extrait", "Image", "JeuID", "NomDuJeu", "Producteur", "TypeDeJeu" },
                 values: new object[,]
                 {
-                    { 1, "Warner Bros. Games", "https://store.steampowered.com/app/990080/Hogwarts_Legacy_LHritage_de_Poudlard/?l=french", new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 35 heures", "https://www.youtube.com/embed/M8ApyJqnME0", "https://w0.peakpx.com/wallpaper/461/931/HD-wallpaper-hogwarts-legacy-poster.jpg", 1, "Hogwarts Legacy : L'Héritage de Poudlard", "Avalanche Software", 0, null },
-                    { 2, "2K", "https://store.steampowered.com/app/397540/Borderlands_3/", new DateTime(2020, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 35 heures", "https://www.youtube.com/embed/zW8rXQnKirE", "https://images5.alphacoders.com/100/thumb-1920-1004495.jpg", 2, "Borderlands 3", "Gearbox Software", 1, null },
-                    { 3, "ConcernedApe", "https://store.steampowered.com/app/413150/Stardew_Valley/", new DateTime(2016, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 52 heures", "https://www.youtube.com/embed/ot7uXNQskhs", "https://www.researchgate.net/publication/342704239/figure/fig1/AS:960471637192707@1606005691630/Stardew-Valley-promotional-image-Sourcewwwstardewvalleynet-Image-copyright-Eric-Barone.jpg", 3, "Stardew Valley", "ConcernedApe", 2, null },
-                    { 4, "Coffee Stain Publishing", "https://store.steampowered.com/app/892970/Valheim/", new DateTime(2021, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 75 heures", "https://www.youtube.com/embed/liQLtCLq3tc", "https://preview.redd.it/cb6vhjj30ap61.gif?format=png8&s=7fede5f0fb30bd3aa14dfdb16eb56e8e8412dedc", 4, "Valheim", "Iron Gate AB", 3, null },
-                    { 5, "Focus Entertainment", "https://store.steampowered.com/app/668580/Atomic_Heart/", new DateTime(2023, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 25 heures", "https://www.youtube.com/embed/h8F4hnR1FoE", "https://news.xbox.com/en-us/wp-content/uploads/sites/2/2022/12/ATOMIC-_HEART_Store_Featured_JPG-af8c6994d37e4bfb590d.jpg", 5, "Atomic Heart", "Mundfish", 4, null },
-                    { 6, "PlayStation PC LLC", "https://store.steampowered.com/app/1649240/Returnal/", new DateTime(2023, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 19 heures", "https://www.youtube.com/embed/BcnRCjHViLw", "https://images.alphacoders.com/113/thumb-1920-1137684.jpg", 6, "Returnal", "Housemarque", 5, null },
-                    { 7, "2K", "https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/", new DateTime(2016, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 22 heures", "https://www.youtube.com/embed/5KdE0p2joJw", "https://i0.wp.com/mynintendonews.com/wp-content/uploads/2018/09/civilization_vi.jpg?fit=1500%2C1000&ssl=1", 7, "Sid Meier’s Civilization VI", "Firaxis Games", 6, null },
-                    { 8, "2K", "https://store.steampowered.com/app/1919590/NBA_2K23/", new DateTime(2022, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 12 heures", "https://www.youtube.com/embed/vE_oLyx25IU", "https://nba2kw.com/wp-content/uploads/2022/06/nba-2k23-cover-athlete-devin-booker-standard-edition.jpg", 8, "NBA 2K23", "Visual Concepts", 7, null },
-                    { 9, "Rockstar Games", "https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/", new DateTime(2015, 4, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 31 heures", "https://www.youtube.com/embed/0hNYgYXhWkM", "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1364906194.jpg", 9, "Grand Theft Auto V", "Rockstar North", 8, null },
-                    { 10, "CAPCOM Co., Ltd.", "https://store.steampowered.com/app/1196590/Resident_Evil_Village/", new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 9 heures", "https://www.youtube.com/embed/tjfTxFzGh3Q", "https://www.residentevil.com/village/assets/images/common/share.png", 10, "Resident Evil Village", "CAPCOM Co., Ltd.", 4, null }
+                    { 1, "Warner Bros. Games", "https://store.steampowered.com/app/990080/Hogwarts_Legacy_LHritage_de_Poudlard/?l=french", new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 35 heures", "https://www.youtube.com/embed/M8ApyJqnME0", "https://w0.peakpx.com/wallpaper/461/931/HD-wallpaper-hogwarts-legacy-poster.jpg", 1, "Hogwarts Legacy : L'Héritage de Poudlard", "Avalanche Software", 0 },
+                    { 2, "2K", "https://store.steampowered.com/app/397540/Borderlands_3/", new DateTime(2020, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 35 heures", "https://www.youtube.com/embed/zW8rXQnKirE", "https://images5.alphacoders.com/100/thumb-1920-1004495.jpg", 2, "Borderlands 3", "Gearbox Software", 1 },
+                    { 3, "ConcernedApe", "https://store.steampowered.com/app/413150/Stardew_Valley/", new DateTime(2016, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 52 heures", "https://www.youtube.com/embed/ot7uXNQskhs", "https://www.researchgate.net/publication/342704239/figure/fig1/AS:960471637192707@1606005691630/Stardew-Valley-promotional-image-Sourcewwwstardewvalleynet-Image-copyright-Eric-Barone.jpg", 3, "Stardew Valley", "ConcernedApe", 2 },
+                    { 4, "Coffee Stain Publishing", "https://store.steampowered.com/app/892970/Valheim/", new DateTime(2021, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 75 heures", "https://www.youtube.com/embed/liQLtCLq3tc", "https://preview.redd.it/cb6vhjj30ap61.gif?format=png8&s=7fede5f0fb30bd3aa14dfdb16eb56e8e8412dedc", 4, "Valheim", "Iron Gate AB", 3 },
+                    { 5, "Focus Entertainment", "https://store.steampowered.com/app/668580/Atomic_Heart/", new DateTime(2023, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 25 heures", "https://www.youtube.com/embed/h8F4hnR1FoE", "https://news.xbox.com/en-us/wp-content/uploads/sites/2/2022/12/ATOMIC-_HEART_Store_Featured_JPG-af8c6994d37e4bfb590d.jpg", 5, "Atomic Heart", "Mundfish", 4 },
+                    { 6, "PlayStation PC LLC", "https://store.steampowered.com/app/1649240/Returnal/", new DateTime(2023, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 19 heures", "https://www.youtube.com/embed/BcnRCjHViLw", "https://images.alphacoders.com/113/thumb-1920-1137684.jpg", 6, "Returnal", "Housemarque", 5 },
+                    { 7, "2K", "https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/", new DateTime(2016, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 22 heures", "https://www.youtube.com/embed/5KdE0p2joJw", "https://i0.wp.com/mynintendonews.com/wp-content/uploads/2018/09/civilization_vi.jpg?fit=1500%2C1000&ssl=1", 7, "Sid Meier’s Civilization VI", "Firaxis Games", 6 },
+                    { 8, "2K", "https://store.steampowered.com/app/1919590/NBA_2K23/", new DateTime(2022, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 12 heures", "https://www.youtube.com/embed/vE_oLyx25IU", "https://nba2kw.com/wp-content/uploads/2022/06/nba-2k23-cover-athlete-devin-booker-standard-edition.jpg", 8, "NBA 2K23", "Visual Concepts", 7 },
+                    { 9, "Rockstar Games", "https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/", new DateTime(2015, 4, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 31 heures", "https://www.youtube.com/embed/0hNYgYXhWkM", "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1364906194.jpg", 9, "Grand Theft Auto V", "Rockstar North", 8 },
+                    { 10, "CAPCOM Co., Ltd.", "https://store.steampowered.com/app/1196590/Resident_Evil_Village/", new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Environ 9 heures", "https://www.youtube.com/embed/tjfTxFzGh3Q", "https://www.residentevil.com/village/assets/images/common/share.png", 10, "Resident Evil Village", "CAPCOM Co., Ltd.", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "JeuUtilisateur",
+                columns: new[] { "FavorisEvaluationID", "UtilisateursUtilisateurID" },
+                values: new object[,]
+                {
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 1 },
+                    { 3, 2 },
+                    { 4, 3 },
+                    { 6, 3 },
+                    { 8, 1 },
+                    { 10, 1 },
+                    { 10, 2 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Jeu_UtilisateurID",
-                table: "Jeu",
-                column: "UtilisateurID");
+                name: "IX_JeuUtilisateur_UtilisateursUtilisateurID",
+                table: "JeuUtilisateur",
+                column: "UtilisateursUtilisateurID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "JeuUtilisateur");
+
+            migrationBuilder.DropTable(
                 name: "Jeu");
 
             migrationBuilder.DropTable(
-                name: "Evaluation");
+                name: "Utilisateur");
 
             migrationBuilder.DropTable(
-                name: "Utilisateur");
+                name: "Evaluation");
         }
     }
 }

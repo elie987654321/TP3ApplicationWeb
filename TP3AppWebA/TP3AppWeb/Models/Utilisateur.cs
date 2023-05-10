@@ -29,7 +29,6 @@ namespace TP3AppWeb.Models
         public Utilisateur()
         {
             Role = RoleDUtilisateur.Utilisateur;
-            Favoris = new List<Jeu>();
         }
     }
 }

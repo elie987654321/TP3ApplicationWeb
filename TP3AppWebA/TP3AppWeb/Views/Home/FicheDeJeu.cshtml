@@ -2,7 +2,7 @@
     ViewData["Title"] = "Fiche de jeu";
 }
 
-@if (@ViewBag.Role == "Admin")
+@if (@ViewBag.Role.Equals("Admin"))
 {
     <div class="texteFiche">
     <h1>Pleins de jeux en rabais ici: <a class="texteFiche admin" href="https://www.g2a.com/">https://www.g2a.com/</a></h1>

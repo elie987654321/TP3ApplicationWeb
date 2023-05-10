@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3AppWeb\\TP3AppWeb\\TP3AppWeb.csproj": {}
+    "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3ApplicationWeb\\TP3AppWebA\\TP3AppWeb\\TP3AppWeb.csproj": {}
   },
   "projects": {
-    "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3AppWeb\\TP3AppWeb\\TP3AppWeb.csproj": {
+    "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3ApplicationWeb\\TP3AppWebA\\TP3AppWeb\\TP3AppWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3AppWeb\\TP3AppWeb\\TP3AppWeb.csproj",
+        "projectUniqueName": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3ApplicationWeb\\TP3AppWebA\\TP3AppWeb\\TP3AppWeb.csproj",
         "projectName": "TP3AppWeb",
-        "projectPath": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3AppWeb\\TP3AppWeb\\TP3AppWeb.csproj",
+        "projectPath": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3ApplicationWeb\\TP3AppWebA\\TP3AppWeb\\TP3AppWeb.csproj",
         "packagesPath": "C:\\Users\\1701633\\.nuget\\packages\\",
-        "outputPath": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3AppWeb\\TP3AppWeb\\obj\\",
+        "outputPath": "F:\\Hiver2023\\420-4B6-LI APPLICATIONS WEB I\\TP3\\TP3ApplicationWeb\\TP3AppWebA\\TP3AppWeb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -55,11 +55,11 @@ namespace TP3AppWeb.Controllers
 
             Utilisateur utilisateurConnecte = null;
 
-            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique.Equals(identifiantUnique));
 
             if (utilisateur != null)
             {
-                if (HttpContext.Session.GetString("IdentifiantUnique") == utilisateur.IdentifiantUnique)
+                if (HttpContext.Session.GetString("IdentifiantUnique").Equals(utilisateur.IdentifiantUnique))
                 {
                     utilisateurConnecte = utilisateur;
 
@@ -163,13 +163,13 @@ namespace TP3AppWeb.Controllers
             Utilisateur utilisateurConnecte = null;
             List<Jeu> catalogue = _context.Jeux.ToList();
             bool contientJeu = false;
-            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique.Equals(identifiantUnique));
             
             if (id >= 0 || id <= catalogue.Count - 1)
             {
                 if (utilisateur != null)
                 {
-                    if (utilisateur.IdentifiantUnique == identifiantUnique)
+                    if (utilisateur.IdentifiantUnique.Equals(identifiantUnique))
                     {
                         utilisateurConnecte = utilisateur;
                     }
@@ -192,6 +192,7 @@ namespace TP3AppWeb.Controllers
                     utilisateurConnecte.Favoris.Add(catalogue[id]);
 
                     _context.Entry(utilisateurConnecte).State = EntityState.Modified;
+
                     _context.SaveChanges();
                         
                 }
@@ -212,11 +213,11 @@ namespace TP3AppWeb.Controllers
             }
 
             Utilisateur utilisateurConnecte = null;
-            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique.Equals(identifiantUnique));
            
             if (utilisateur != null)
             {
-                if (utilisateur.IdentifiantUnique == identifiantUnique)
+                if (utilisateur.IdentifiantUnique.Equals(identifiantUnique))
                 {
                     utilisateurConnecte = utilisateur;
                 }

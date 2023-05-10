@@ -31,10 +31,10 @@ namespace TP3AppWeb.Controllers
             string pseudo = "";
             string role = "";
 
-            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique.Equals(identifiantUnique));
 
             if (utilisateur != null) { 
-                if (identifiantUnique == utilisateur.IdentifiantUnique && motDePasse == utilisateur.MotDePasse)
+                if (identifiantUnique.Equals(utilisateur.IdentifiantUnique) && motDePasse.Equals(utilisateur.MotDePasse))
                 {
                     utilisateurTrouve = utilisateur;
                     pseudo = utilisateur.Pseudo;
@@ -64,11 +64,11 @@ namespace TP3AppWeb.Controllers
 
             bool compteExistant = false;
 
-            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique.Equals(identifiantUnique));
 
             if (utilisateur != null)
             {
-                if (identifiantUnique == utilisateur.IdentifiantUnique)
+                if (identifiantUnique.Equals(utilisateur.IdentifiantUnique))
                 {
                     compteExistant = true;
                 }
