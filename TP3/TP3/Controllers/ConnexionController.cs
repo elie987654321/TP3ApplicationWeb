@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using TP3.Models;
-
+using Newtonsoft.Json;
 
 namespace TP2.Controllers
 {
@@ -56,18 +56,75 @@ namespace TP2.Controllers
         public ActionResult CreerCompte(string identifiantUnique, string pseudo, string prenom, string nom, string password)
         {
 
-            List<Utilisateur> listeUtilisateurs = _context.utilisateurs.ToList();
-            listeDesUtilisateurs.Charger(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-            bool succes = listeDesUtilisateurs.CreerUtilisateur(identifiantUnique,pseudo, password, nom, prenom);
-
-
-            if (succes)
+           
+            if (identifiantUnique == null || identifiantUnique == "")
             {
-                this.HttpContext.Session.SetString("Utilisateur", JsonConvert.SerializeObject(listeDesUtilisateurs.GetUtilisateurByPseudo(pseudo)));
-                return RedirectToAction("Accueil", "Home" );
+                return RedirectToAction("Accueil", "CreerCompte");
             }
+
+            //Verifie qu'un pseudo valide a été entrer
+            if (pseudo == null || pseudo == "")
+            {
+                return RedirectToAction("Accueil", "CreerCompte");
+            }
+
+
+            //Verifie qu'un mot de passe valide a été entrée
+            if (password == null || password == "")
+            {
+                return RedirectToAction("Accueil", "CreerCompte");
+            }
+
+
+            if (prenom == null || prenom == "")
+            {
+                return RedirectToAction("Accueil", "CreerCompte");
+            }
+
+            if (nom == null || nom == "")
+            {
+                return RedirectToAction("Accueil", "CreerCompte");
+            }
+
+            List<Utilisateur> listeUtilisateurs = _context.utilisateurs.ToList();
+
             
-            return RedirectToAction("Accueil", "Connexion");
+            
+
+            //Verifie si le nom d'utilisateur existe deja
+            bool trouve = false;
+            int i = 0;
+            Utilisateur utilisateurATester;
+            
+            
+            do
+            {
+                utilisateurATester = listeUtilisateurs[i];
+                trouve = utilisateurATester.IDUtilisateur == identifiantUnique;
+                i++;
+            }
+            while (!trouve && i < listeUtilisateurs.Count - 1);
+            if (trouve)
+            {
+                return RedirectToAction("Accueil", "CreerCompte");
+            }
+
+
+
+            //Ajout de l'utilisateur
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.IDUtilisateur = identifiantUnique;
+            utilisateur.Pseudo = pseudo;
+            utilisateur.MotDePasse = password;
+            utilisateur.Prenom = prenom;
+            utilisateur.Nom = nom;
+
+            _context.utilisateurs.Add(utilisateur);
+            _context.SaveChanges();
+
+            this.HttpContext.Session.SetString("Utilisateur", JsonConvert.SerializeObject(utilisateur));
+
+            return RedirectToAction("Home", "Accueil");
         }
     }
 }

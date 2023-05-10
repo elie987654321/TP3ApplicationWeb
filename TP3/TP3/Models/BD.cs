@@ -6,7 +6,7 @@ namespace TP3.Models
     {
         public DbSet<Catalogue> catalogues;
         public DbSet<Evaluation> evaluations;
-        public DbSet<Jeu> jeu;
+        public DbSet<Jeu> jeux;
         public DbSet<ListeUtilisateurs> listeUtilisateurs;
         public DbSet<Utilisateur> utilisateurs;
     }

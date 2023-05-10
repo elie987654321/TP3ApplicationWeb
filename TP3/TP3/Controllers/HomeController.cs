@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TP2.Models;
+using TP3.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -8,6 +8,8 @@ namespace TP2.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BD _context = new BD();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -36,22 +38,21 @@ namespace TP2.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ListeDeJeux()
         {
-            Catalogue catalogue = new Catalogue();
-            catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
 
             string userString = HttpContext.Session.GetString("Utilisateur");
+            Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
+
             if (userString == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
 
-            List<Jeu> model = new List<Jeu>(catalogue.ListeDeJeux);
-
+            List<Jeu> listJeu = _context.jeux.ToList();
+            
             ViewBag.Pseudo = user.Pseudo;
 
-            return View(model);
+            return View(listJeu);
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
