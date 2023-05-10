@@ -1,5 +1,4 @@
 ﻿
-using TP3AppWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using static TP3AppWeb.Models.Evaluation;
 using static TP3AppWeb.Models.Jeu;
@@ -57,7 +56,7 @@ namespace TP3AppWeb.Models
             modelBuilder.Entity<Utilisateur>().HasData(
                 new Utilisateur { UtilisateurID = 1, IdentifiantUnique = "bob123", Pseudo = "Bobby", MotDePasse = "secret", Nom = "Bobob", Prenom = "Bob", Role = RoleDUtilisateur.Admin, Favoris = new List<Jeu>() },
                 new Utilisateur { UtilisateurID = 2, IdentifiantUnique = "gerry321", Pseudo = "Muffin", MotDePasse = "mdp123", Nom = "Tremblay", Prenom = "George", Role = RoleDUtilisateur.Utilisateur, Favoris = new List<Jeu>() },
-                new Utilisateur { UtilisateurID = 3, IdentifiantUnique = "Joejoe546", Pseudo = "Joejoe", MotDePasse = "Soleil01", Nom = "Jean", Prenom = "Joe", Role = RoleDUtilisateur.Utilisateur, Favoris = new List<Jeu>() }
+                new Utilisateur { UtilisateurID = 3, IdentifiantUnique = "joejoe546", Pseudo = "Joejoe", MotDePasse = "Soleil01", Nom = "Jean", Prenom = "Joe", Role = RoleDUtilisateur.Utilisateur, Favoris = new List<Jeu>() }
                 );
 
             base.OnModelCreating(modelBuilder);

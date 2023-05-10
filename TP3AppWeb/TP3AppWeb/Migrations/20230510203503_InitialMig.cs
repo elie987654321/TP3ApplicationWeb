@@ -96,7 +96,7 @@ namespace TP3AppWeb.Migrations
                 {
                     { 1, "bob123", "secret", "Bobob", "Bob", "Bobby", 2 },
                     { 2, "gerry321", "mdp123", "Tremblay", "George", "Muffin", 1 },
-                    { 3, "Joejoe546", "Soleil01", "Jean", "Joe", "Joejoe", 1 }
+                    { 3, "joejoe546", "Soleil01", "Jean", "Joe", "Joejoe", 1 }
                 });
 
             migrationBuilder.InsertData(

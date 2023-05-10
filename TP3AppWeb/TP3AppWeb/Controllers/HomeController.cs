@@ -9,13 +9,12 @@ namespace TP3AppWeb.Controllers
     {
         private readonly TP3Context _context = new TP3Context();
 
-
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Accueil()
         {
-            string ididentifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
+            string identifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
 
-            if (ididentifiantUnique == null)
+            if (identifiantUnique == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
@@ -28,9 +27,9 @@ namespace TP3AppWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ListeDeJeux()
         {
-            string ididentifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
+            string identifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
 
-            if (ididentifiantUnique == null)
+            if (identifiantUnique == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
@@ -44,9 +43,9 @@ namespace TP3AppWeb.Controllers
         public IActionResult Favoris()
         {
 
-            string ididentifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
+            string identifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
 
-            if (ididentifiantUnique == null)
+            if (identifiantUnique == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
@@ -56,12 +55,14 @@ namespace TP3AppWeb.Controllers
 
             Utilisateur utilisateurConnecte = null;
 
-            foreach (Utilisateur utilisateur in _context.Utilisateurs)
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+
+            if (utilisateur != null)
             {
                 if (HttpContext.Session.GetString("IdentifiantUnique") == utilisateur.IdentifiantUnique)
                 {
                     utilisateurConnecte = utilisateur;
-                    break;
+
                 }
             }
 
@@ -73,9 +74,9 @@ namespace TP3AppWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FicheDeJeu(int id)
         {
-            string ididentifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
+            string identifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
 
-            if (ididentifiantUnique == null)
+            if (identifiantUnique == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
@@ -112,9 +113,9 @@ namespace TP3AppWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FicheDeJeuFavori(int id)
         {
-            string ididentifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
+            string identifiantUnique = HttpContext.Session.GetString("IdentifiantUnique");
 
-            if (ididentifiantUnique == null)
+            if (identifiantUnique == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
@@ -162,44 +163,40 @@ namespace TP3AppWeb.Controllers
             Utilisateur utilisateurConnecte = null;
             List<Jeu> catalogue = _context.Jeux.ToList();
             bool contientJeu = false;
-
-            if (utilisateurConnecte != null) { 
-                if (id >= 0 || id <= catalogue.Count - 1)
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+            
+            if (id >= 0 || id <= catalogue.Count - 1)
+            {
+                if (utilisateur != null)
                 {
-                    foreach (Utilisateur uti in _context.Utilisateurs)
+                    if (utilisateur.IdentifiantUnique == identifiantUnique)
                     {
-                        if (uti.IdentifiantUnique == identifiantUnique)
-                        {
-                            utilisateurConnecte = uti;
-                        }
+                        utilisateurConnecte = utilisateur;
                     }
+                }
 
-                    if (utilisateurConnecte.Favoris.Count > 0)
+                if (utilisateurConnecte.Favoris.Count > 0)
+                {
+                    foreach (Jeu jeu in utilisateurConnecte.Favoris)
                     {
-                        foreach (Jeu jeu in utilisateurConnecte.Favoris)
+                        if (catalogue[id].NomDuJeu.Equals(jeu.NomDuJeu))
                         {
-                            if (catalogue[id].NomDuJeu.Equals(jeu.NomDuJeu))
-                            {
-                                contientJeu = true;
-                            }
-                        }
-                    }
-
-                    if (!contientJeu)
-                    {
-
-                        utilisateurConnecte.Favoris.Add(catalogue[id]);
-                        Console.WriteLine("before context");
-                        using (var db = new TP3Context())
-                        {
-                            Console.WriteLine("allo");
-                            db.Entry(utilisateurConnecte).State = EntityState.Modified;
-
-                            db.SaveChanges();
+                            contientJeu = true;
                         }
                     }
                 }
+
+                if (!contientJeu)
+                {
+
+                    utilisateurConnecte.Favoris.Add(catalogue[id]);
+
+                    _context.Entry(utilisateurConnecte).State = EntityState.Modified;
+                    _context.SaveChanges();
+                        
+                }
             }
+            
 
             return RedirectToAction("FicheDeJeu", "Home", new { id = id });
         }
@@ -215,34 +212,33 @@ namespace TP3AppWeb.Controllers
             }
 
             Utilisateur utilisateurConnecte = null;
-            
-            if (utilisateurConnecte != null) {
-                foreach (Utilisateur uti in _context.Utilisateurs)
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+           
+            if (utilisateur != null)
+            {
+                if (utilisateur.IdentifiantUnique == identifiantUnique)
                 {
-                    if (uti.IdentifiantUnique == identifiantUnique)
-                    {
-                        utilisateurConnecte = uti;
-                    }
+                    utilisateurConnecte = utilisateur;
                 }
+            }
 
-                if (utilisateurConnecte.Favoris.Count > 0)
+            if (utilisateurConnecte.Favoris.Count > 0)
+            {
+                foreach (Jeu favori in utilisateurConnecte.Favoris)
                 {
-                    foreach (Jeu favori in utilisateurConnecte.Favoris)
+                    if (favori.NomDuJeu.Equals(nomDuJeu))
                     {
-                        if (favori.NomDuJeu.Equals(nomDuJeu))
-                        {
-                            utilisateurConnecte.Favoris.Remove(favori);
-                            using (var db = new TP3Context())
-                            {
-                                db.Entry(utilisateurConnecte).State = EntityState.Modified;
+                        utilisateurConnecte.Favoris.Remove(favori);
 
-                                db.SaveChanges();
-                            }
-                            break;
-                        }
+                        _context.Entry(utilisateurConnecte).State = EntityState.Modified;
+
+                        _context.SaveChanges();
+
+                        break;
                     }
                 }
             }
+            
 
             return RedirectToAction("Favoris", "Home");
         }
@@ -261,5 +257,4 @@ namespace TP3AppWeb.Controllers
             return RedirectToAction("Accueil", "Connexion");
         }
     }
-
 }

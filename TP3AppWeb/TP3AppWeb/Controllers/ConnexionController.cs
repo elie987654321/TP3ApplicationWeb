@@ -18,8 +18,9 @@ namespace TP3AppWeb.Controllers
 
         }
 
-        public ActionResult CreerCompte()
+        public ActionResult CreerCompte(string message = "")
         {
+            ViewBag.message = message;
             return View();
         }
 
@@ -30,14 +31,15 @@ namespace TP3AppWeb.Controllers
             string pseudo = "";
             string role = "";
 
-            foreach (Utilisateur utilisateur in _context.Utilisateurs)
-            {
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+
+            if (utilisateur != null) { 
                 if (identifiantUnique == utilisateur.IdentifiantUnique && motDePasse == utilisateur.MotDePasse)
                 {
                     utilisateurTrouve = utilisateur;
                     pseudo = utilisateur.Pseudo;
                     role = utilisateur.Role.ToString();
-                    break;
+
                 }
             }
 
@@ -62,31 +64,29 @@ namespace TP3AppWeb.Controllers
 
             bool compteExistant = false;
 
-            foreach (Utilisateur utilisateur in _context.Utilisateurs)
+            Utilisateur utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.IdentifiantUnique == identifiantUnique);
+
+            if (utilisateur != null)
             {
                 if (identifiantUnique == utilisateur.IdentifiantUnique)
                 {
                     compteExistant = true;
-                    break;
                 }
             }
 
-
             if (!compteExistant)
             {
-                Utilisateur utilisateur = new Utilisateur();
+                Utilisateur utilisateurCree = new Utilisateur();
 
-                utilisateur.IdentifiantUnique = identifiantUnique;
-                utilisateur.Pseudo = pseudo;
-                utilisateur.MotDePasse = password;
-                utilisateur.Nom = nom;
-                utilisateur.Prenom = prenom;
-
-                using (var db = new TP3Context())
-                {
-                    db.Utilisateurs.Add(utilisateur);
-                    db.SaveChanges();
-                }
+                utilisateurCree.UtilisateurID = _context.Utilisateurs.Count() + 1;
+                utilisateurCree.IdentifiantUnique = identifiantUnique;
+                utilisateurCree.Pseudo = pseudo;
+                utilisateurCree.MotDePasse = password;
+                utilisateurCree.Nom = nom;
+                utilisateurCree.Prenom = prenom;
+  
+                _context.Utilisateurs.Add(utilisateurCree);
+                _context.SaveChanges();
 
                 this.HttpContext.Session.SetString("IdentifiantUnique", identifiantUnique);
                 this.HttpContext.Session.SetString("Pseudo", pseudo);
@@ -95,10 +95,9 @@ namespace TP3AppWeb.Controllers
             }
             else
             {
-                return RedirectToAction("Accueil", "Connexion");
+                return RedirectToAction("CreerCompte", "Connexion", new { @message = "Le nom d'utilisateur est déja pris" });
             }
 
-           
         }
     }
 }

@@ -4,6 +4,7 @@
 
 <form class="formCreerCompte" asp-controller="Connexion">
    <div class="form-group w-25">
+        <p style="color:red">@Html.Raw(ViewBag.message)</p>
         <label for="identifiantUnique">Identifiant unique</label>
         <input class="form-control" placeholder="Identifiant unique" required type="text" id="identifiantUnique" name="identifiantUnique"/>
     </div>

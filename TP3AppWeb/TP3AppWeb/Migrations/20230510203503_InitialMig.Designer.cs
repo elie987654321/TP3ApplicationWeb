@@ -12,7 +12,7 @@ using TP3AppWeb.Models;
 namespace TP3AppWeb.Migrations
 {
     [DbContext(typeof(TP3Context))]
-    [Migration("20230509000557_InitialMig")]
+    [Migration("20230510203503_InitialMig")]
     partial class InitialMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -353,7 +353,7 @@ namespace TP3AppWeb.Migrations
                         new
                         {
                             UtilisateurID = 3,
-                            IdentifiantUnique = "Joejoe546",
+                            IdentifiantUnique = "joejoe546",
                             MotDePasse = "Soleil01",
                             Nom = "Jean",
                             Prenom = "Joe",

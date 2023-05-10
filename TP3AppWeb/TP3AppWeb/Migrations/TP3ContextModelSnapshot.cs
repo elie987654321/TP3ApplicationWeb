@@ -351,7 +351,7 @@ namespace TP3AppWeb.Migrations
                         new
                         {
                             UtilisateurID = 3,
-                            IdentifiantUnique = "Joejoe546",
+                            IdentifiantUnique = "joejoe546",
                             MotDePasse = "Soleil01",
                             Nom = "Jean",
                             Prenom = "Joe",
