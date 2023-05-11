@@ -2,9 +2,8 @@
 using System.Diagnostics;
 using TP3.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace TP2.Controllers
+namespace TP3.Controllers
 {
     public class HomeController : Controller
     {
@@ -58,33 +57,21 @@ namespace TP2.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Favoris()
         {
-            Catalogue catalogue = new Catalogue();
-            catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
-
-            ListeUtilisateurs listeDesUtilisateurs = new ListeUtilisateurs();
-            listeDesUtilisateurs.Charger(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-
             string userString = HttpContext.Session.GetString("Utilisateur");
             if (userString == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
+            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.IDUtilisateur == JsonConvert.DeserializeObject<Utilisateur>(userString).IDUtilisateur).FirstOrDefault();
 
-            List<Jeu> mesFavoris = new List<Jeu>();
+            List<Jeu> listJeux = _context.jeux.ToList();
 
-            foreach (Utilisateur uti in listeDesUtilisateurs.Liste)
-            {
-                if (uti.IdentifiantUnique == user.IdentifiantUnique)
-                {
-                    mesFavoris = uti.Favoris;
-                }
-            }
+            List<Jeu> favoris = utilisateurModel.Favoris;
 
-            Tuple<List<Jeu>, List<Jeu>> model = new Tuple<List<Jeu>, List<Jeu>>(mesFavoris, catalogue.ListeDeJeux);
+            Tuple<List<Jeu>, List<Jeu>> model = new Tuple<List<Jeu>, List<Jeu>>(favoris, listJeux);
 
-            ViewBag.Pseudo = user.Pseudo;
+            ViewBag.Pseudo = utilisateurModel.Pseudo;
 
             return View(model);
         }
@@ -98,25 +85,26 @@ namespace TP2.Controllers
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            Catalogue catalogue = new Catalogue();
-            catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
 
-            if (id >= 0 || id <= catalogue.ListeDeJeux.Count - 1)
-            {
+            List<Jeu> listJeu = _context.jeux.ToList();
 
-                ViewBag.NomDuJeu = catalogue.ListeDeJeux[id].NomDuJeu;
-                ViewBag.TypeDeJeu = catalogue.ListeDeJeux[id].TypeDeJeu;
-                ViewBag.EvaluationCote = catalogue.ListeDeJeux[id].Evaluation.Cote;
-                ViewBag.EvaluationDescription = catalogue.ListeDeJeux[id].Evaluation.Description;
-                ViewBag.DateProduction = catalogue.ListeDeJeux[id].DateProduction;
-                ViewBag.Duree = catalogue.ListeDeJeux[id].Duree;
-                ViewBag.Auteur = catalogue.ListeDeJeux[id].Auteur;
-                ViewBag.Producteur = catalogue.ListeDeJeux[id].Producteur;
-                ViewBag.Extrait = catalogue.ListeDeJeux[id].Extrait;
-                ViewBag.Complet = catalogue.ListeDeJeux[id].Complet;
-                ViewBag.Image = id+1 + ".jpg";
-                ViewBag.Id = id;
-            }
+            Jeu jeu = _context.jeux.Where(j => j.IDJeu == id).FirstOrDefault(); 
+
+            
+
+            ViewBag.NomDuJeu = jeu.NomDuJeu;
+            ViewBag.TypeDeJeu = jeu.TypeDeJeu;
+            ViewBag.EvaluationCote = jeu.Evaluation.Cote;
+            ViewBag.EvaluationDescription = jeu.Evaluation.Description;
+            ViewBag.DateProduction = jeu.DateProduction;
+            ViewBag.Duree = jeu.Duree;
+            ViewBag.Auteur = jeu.Auteur;
+            ViewBag.Producteur = jeu.Producteur;
+            ViewBag.Extrait = jeu.Extrait;
+            ViewBag.Complet = jeu.Complet;
+            ViewBag.Image = id+1 + ".jpg";
+            ViewBag.Id = id;
+       
             
             Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
             ViewBag.Pseudo = user.Pseudo;
@@ -126,11 +114,7 @@ namespace TP2.Controllers
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FicheDeJeuFavori(int id)
-        {/*
-            Catalogue catalogue = new Catalogue();
-            catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
-            */
-
+        {
             string userString = HttpContext.Session.GetString("Utilisateur");
             if (userString == null)
             {
@@ -164,12 +148,6 @@ namespace TP2.Controllers
 
         public IActionResult AjouterAuFavori(int id)
         {
-            Catalogue catalogue = new Catalogue();
-            catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
-
-            ListeUtilisateurs listeDesUtilisateurs = new ListeUtilisateurs();
-            listeDesUtilisateurs.Charger(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-
             string userString = HttpContext.Session.GetString("Utilisateur");
             if (userString == null)
             {
@@ -178,29 +156,19 @@ namespace TP2.Controllers
             Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
 
             bool contientJeu = false;
+            
 
-            if (id >= 0 || id <= catalogue.ListeDeJeux.Count - 1)
+            Utilisateur utilisateur = _context.utilisateurs.Where(u => u.IDUtilisateur == user.IDUtilisateur).FirstOrDefault();
+
+            if (utilisateur.Favoris.Where(f => f.IDJeu == id).FirstOrDefault() != null)
             {
-                foreach (Utilisateur uti in listeDesUtilisateurs.Liste)
-                {
-                    if (uti.IdentifiantUnique == user.IdentifiantUnique)
-                    {
-                        foreach (var jeu in uti.Favoris)
-                        {
-                            if (catalogue.ListeDeJeux[id].NomDuJeu.Equals(jeu.NomDuJeu))
-                            {
-                                contientJeu = true;
-                            }
-                        }
-                        
-                        if (!contientJeu)
-                        {
-                            uti.Favoris.Add(catalogue.ListeDeJeux[id]);
-                            listeDesUtilisateurs.Sauvegarder(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-                        }
-                    }
-                }  
+                utilisateur.Favoris.Add(_context.jeux.Where(j => j.IDJeu == id).First());
             }
+
+            _context.SaveChanges();
+
+
+        
 
             return RedirectToAction("FicheDeJeu", "Home", new {id=id});
         }
@@ -208,34 +176,24 @@ namespace TP2.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult SupprimerDesFavoris(int id, string nomDuJeu)
         {
-            ListeUtilisateurs listeDesUtilisateurs = new ListeUtilisateurs();
-            listeDesUtilisateurs.Charger(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-
+          
             string userString = HttpContext.Session.GetString("Utilisateur");
             if (userString == null)
             {
                 return RedirectToAction("Accueil", "Connexion");
             }
 
+            List<Utilisateur> listUtilisateur = _context.utilisateurs.ToList();
+
+
             Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
-
-            foreach (Utilisateur uti in listeDesUtilisateurs.Liste)
-            {
-                if (uti.IdentifiantUnique == user.IdentifiantUnique)
-                {
-                    foreach (var favori in uti.Favoris)
-                    {
-                        if (favori.NomDuJeu.Equals(nomDuJeu))
-                        {
-                            uti.Favoris.Remove(favori);
-                            listeDesUtilisateurs.Sauvegarder(Environment.CurrentDirectory + "/wwwroot/json/utilisateurs.json");
-                            break;
-                        }
-                    }
-
-                }
-            }
             
+            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.IDUtilisateur == user.IDUtilisateur).FirstOrDefault();
+            Jeu jeu = _context.jeux.Where(j => j.NomDuJeu == nomDuJeu).FirstOrDefault();
+
+            utilisateurModel.Favoris.Remove(jeu);
+
+            _context.SaveChanges();
             return RedirectToAction("Favoris", "Home");
         }
 

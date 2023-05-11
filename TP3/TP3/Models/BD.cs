@@ -9,5 +9,14 @@ namespace TP3.Models
         public DbSet<Jeu> jeux;
         public DbSet<ListeUtilisateurs> listeUtilisateurs;
         public DbSet<Utilisateur> utilisateurs;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer(
+            @"Server=(localdb)\MSSQLLocalDB;Database=Ecole;Trusted_Connection=True;"
+            );
+            base.OnConfiguring(optionsBuilder);
+        }
+
     }
 }
