@@ -126,9 +126,10 @@ namespace TP2.Controllers
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult FicheDeJeuFavori(int id)
-        {
+        {/*
             Catalogue catalogue = new Catalogue();
             catalogue.Ajouter(2, null, Environment.CurrentDirectory + "/wwwroot/json/fichierDeJeux.json");
+            */
 
             string userString = HttpContext.Session.GetString("Utilisateur");
             if (userString == null)
@@ -136,23 +137,22 @@ namespace TP2.Controllers
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            if (id >= 0 || id <= catalogue.ListeDeJeux.Count - 1)
-            {
+            Jeu jeu = _context.jeux.Where(j => j.IDJeu == id).FirstOrDefault();
 
-                ViewBag.NomDuJeu = catalogue.ListeDeJeux[id].NomDuJeu;
-                ViewBag.TypeDeJeu = catalogue.ListeDeJeux[id].TypeDeJeu;
-                ViewBag.EvaluationCote = catalogue.ListeDeJeux[id].Evaluation.Cote;
-                ViewBag.EvaluationDescription = catalogue.ListeDeJeux[id].Evaluation.Description;
-                ViewBag.DateProduction = catalogue.ListeDeJeux[id].DateProduction;
-                ViewBag.Duree = catalogue.ListeDeJeux[id].Duree;
-                ViewBag.Auteur = catalogue.ListeDeJeux[id].Auteur;
-                ViewBag.Producteur = catalogue.ListeDeJeux[id].Producteur;
-                ViewBag.Extrait = catalogue.ListeDeJeux[id].Extrait;
-                ViewBag.Complet = catalogue.ListeDeJeux[id].Complet;
+            { 
+                ViewBag.NomDuJeu = jeu.NomDuJeu;
+                ViewBag.TypeDeJeu = jeu.TypeDeJeu;
+                ViewBag.EvaluationCote = jeu.Evaluation.Cote;
+                ViewBag.EvaluationDescription = jeu.Evaluation.Description;
+                ViewBag.DateProduction = jeu.DateProduction;
+                ViewBag.Duree = jeu.Duree;
+                ViewBag.Auteur = jeu.Auteur;
+                ViewBag.Producteur = jeu.Producteur;
+                ViewBag.Extrait = jeu.Extrait;
+                ViewBag.Complet = jeu.Complet;
                 ViewBag.Image = id + 1 + ".jpg";
                 ViewBag.Id = id;
             }
-
             Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
 
             ViewBag.Pseudo = user.Pseudo;
