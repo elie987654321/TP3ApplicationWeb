@@ -4,16 +4,14 @@ namespace TP3.Models
 {
     public class BD : DbContext
     {
-        public DbSet<Catalogue> catalogues;
-        public DbSet<Evaluation> evaluations;
-        public DbSet<Jeu> jeux;
-        public DbSet<ListeUtilisateurs> listeUtilisateurs;
-        public DbSet<Utilisateur> utilisateurs;
+       public DbSet<Evaluation> evaluations { get; set; }
+        public DbSet<Jeu> jeux { get; set; }
+        public DbSet<Utilisateur> utilisateurs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies().UseSqlServer(
-            @"Server=(localdb)\MSSQLLocalDB;Database=Ecole;Trusted_Connection=True;"
+            @"Server=(localdb)\MSSQLLocalDB;Database=TP3;Trusted_Connection=True;"
             );
             base.OnConfiguring(optionsBuilder);
         }

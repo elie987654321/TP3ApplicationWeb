@@ -14,14 +14,14 @@ namespace TP3.Models
 
 
         
-        public string IDUtilisateur { get; set ; }
+        public string UtilisateurID { get; set ; }
         public string Pseudo { get ; set ; }
         public string MotDePasse { get ; set ; }
         public string Nom { get ; set ; }
         public string Prenom { get ; set ; }
         public int Role { get; set ; }
-        public List<Jeu> Favoris { get; set; }
-        public List<Evaluation> Evaluations { get; set; }
+        public virtual ICollection<Jeu> Favoris { get; set; }
+        public virtual ICollection<Evaluation> Evaluations { get; set; }
 
 
         public RoleDUtilisateur RoleIntToEnum()

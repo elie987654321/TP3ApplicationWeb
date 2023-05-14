@@ -17,13 +17,13 @@ namespace TP3.Models
             Crime
         }
 
-        public int IDJeu;
+        public int JeuID { get; set; }
 
         // Accesseurs et mutateurs
         public string NomDuJeu { get; set ; }
         public int TypeDeJeu { get ; set ; }
-        public Evaluation Evaluation { get ; set ; }
-        public DateTime DateProduction { get ; set ; }
+        public virtual Evaluation Evaluation { get ; set ; }
+        public virtual DateTime DateProduction { get ; set ; }
         public string Duree { get ; set ; }
         public string Auteur { get ; set ; }
         public string Producteur { get ; set ; }
@@ -31,9 +31,8 @@ namespace TP3.Models
         public string Complet { get ; set ; }
         public string Image { get ; set ; }
 
-        public ICollection<Evaluation> evaluations { get ; set ; }
+        public virtual ICollection<Evaluation> evaluations { get ; set ; }
 
-        public List<int> EvaluationMoyenne { get ; set ; }
         
 
 
@@ -52,31 +51,7 @@ namespace TP3.Models
             return estNouveau;
         }
 
-        public void AjouterEvaluationCote(List<Evaluation> listeEvaluation)
-        {
-            
-            foreach (Evaluation evaluation in listeEvaluation) {
-                if (this.Evaluation.Description == evaluation.Description)
-                {
-                    this.EvaluationMoyenne.Add( evaluation.Cote);
-                }
-                    
-            }
-        }
-
-        public int MoyenneEvaluations()
-        {
-            int total = 0;
-
-            foreach (int cote in EvaluationMoyenne)
-            {
-                total += Convert.ToInt32(((int)cote));
-            }
-
-            double moyenne = total / EvaluationMoyenne.Count;
-
-            return Convert.ToInt32(Math.Floor(moyenne));
-        }
+     
 
         // Comparaison
         public static bool operator ==(Jeu jeu1, Jeu jeu2)

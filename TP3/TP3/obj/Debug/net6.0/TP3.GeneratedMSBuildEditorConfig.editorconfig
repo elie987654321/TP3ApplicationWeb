@@ -8,65 +8,65 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TP3
 build_property.RootNamespace = TP3
-build_property.ProjectDir = C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\
+build_property.ProjectDir = C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\1445131\Documents\GitHub\TP3ApplicationWeb\TP3\TP3
+build_property.MSBuildProjectDirectory = C:\Users\Utilisateur\Documents\GitHub\TP3ApplicationWeb\TP3\TP3
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Connexion/Accueil.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Connexion/Accueil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ubmV4aW9uXEFjY3VlaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Connexion/CreerCompte.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Connexion/CreerCompte.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ubmV4aW9uXENyZWVyQ29tcHRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/Accueil.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/Accueil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2N1ZWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/Favoris.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/Favoris.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGYXZvcmlzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/FicheDeJeu.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/FicheDeJeu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaWNoZURlSmV1LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/FicheDeJeuFavori.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/FicheDeJeuFavori.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaWNoZURlSmV1RmF2b3JpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/ListeDeJeux.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Home/ListeDeJeux.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaXN0ZURlSmV1eC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/Copyright.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/Copyright.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvcHlyaWdodC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/Error.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_LayoutConnexion.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_LayoutConnexion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDb25uZXhpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/_ViewImports.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/_ViewStart.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/1445131/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_Layout.cshtml]
+[C:/Users/Utilisateur/Documents/GitHub/TP3ApplicationWeb/TP3/TP3/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-dzyzpskuyi

@@ -34,7 +34,7 @@ namespace TP2.Controllers
             do
             {
                 u = listeUtilisateurs[i];
-                trouve = u.IDUtilisateur == nomUtilisateur && u.MotDePasse == motDePasse;
+                trouve = u.UtilisateurID == nomUtilisateur && u.MotDePasse == motDePasse;
                 i++;
             }
             while (!trouve && i < listeUtilisateurs.Count);
@@ -43,7 +43,7 @@ namespace TP2.Controllers
 
             if (trouve != null)
             {
-                this.HttpContext.Session.SetString("Utilisateur", u.IDUtilisateur);
+                this.HttpContext.Session.SetString("Utilisateur", u.UtilisateurID);
                 return RedirectToAction("Accueil", "Home");
             }
             else
@@ -86,34 +86,37 @@ namespace TP2.Controllers
                 return RedirectToAction("Accueil", "CreerCompte");
             }
 
-            List<Utilisateur> listeUtilisateurs = _context.utilisateurs.ToList();
 
-            
-            
 
-            //Verifie si le nom d'utilisateur existe deja
-            bool trouve = false;
-            int i = 0;
-            Utilisateur utilisateurATester;
-            
-            
-            do
+            if (_context.utilisateurs.Count() > 0)
             {
-                utilisateurATester = listeUtilisateurs[i];
-                trouve = utilisateurATester.IDUtilisateur == identifiantUnique;
-                i++;
-            }
-            while (!trouve && i < listeUtilisateurs.Count - 1);
-            if (trouve)
-            {
-                return RedirectToAction("Accueil", "CreerCompte");
-            }
 
+                List<Utilisateur> listeUtilisateurs = _context.utilisateurs.ToList() ;
+
+
+                //Verifie si le nom d'utilisateur existe deja
+                bool trouve = false;
+                int i = 0;
+                Utilisateur utilisateurATester;
+
+
+                do
+                {
+                    utilisateurATester = listeUtilisateurs[i];
+                    trouve = utilisateurATester.UtilisateurID == identifiantUnique;
+                    i++;
+                }
+                while (!trouve && i < listeUtilisateurs.Count - 1);
+                if (trouve)
+                {
+                    return RedirectToAction("Accueil", "CreerCompte");
+                }
+            }
 
 
             //Ajout de l'utilisateur
             Utilisateur utilisateur = new Utilisateur();
-            utilisateur.IDUtilisateur = identifiantUnique;
+            utilisateur.UtilisateurID = identifiantUnique;
             utilisateur.Pseudo = pseudo;
             utilisateur.MotDePasse = password;
             utilisateur.Prenom = prenom;
@@ -124,7 +127,7 @@ namespace TP2.Controllers
 
             this.HttpContext.Session.SetString("Utilisateur", JsonConvert.SerializeObject(utilisateur));
 
-            return RedirectToAction("Home", "Accueil");
+            return RedirectToAction("Accueil", "Home");
         }
     }
 }

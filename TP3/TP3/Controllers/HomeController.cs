@@ -3,6 +3,7 @@ using System.Diagnostics;
 using TP3.Models;
 using Newtonsoft.Json;
 
+
 namespace TP3.Controllers
 {
     public class HomeController : Controller
@@ -63,11 +64,11 @@ namespace TP3.Controllers
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.IDUtilisateur == JsonConvert.DeserializeObject<Utilisateur>(userString).IDUtilisateur).FirstOrDefault();
+            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.UtilisateurID == JsonConvert.DeserializeObject<Utilisateur>(userString).UtilisateurID).FirstOrDefault();
 
             List<Jeu> listJeux = _context.jeux.ToList();
 
-            List<Jeu> favoris = utilisateurModel.Favoris;
+            List<Jeu> favoris = utilisateurModel.Favoris.ToList();
 
             Tuple<List<Jeu>, List<Jeu>> model = new Tuple<List<Jeu>, List<Jeu>>(favoris, listJeux);
 
@@ -88,7 +89,7 @@ namespace TP3.Controllers
 
             List<Jeu> listJeu = _context.jeux.ToList();
 
-            Jeu jeu = _context.jeux.Where(j => j.IDJeu == id).FirstOrDefault(); 
+            Jeu jeu = _context.jeux.Where(j => j.JeuID == id).FirstOrDefault(); 
 
             
 
@@ -121,7 +122,7 @@ namespace TP3.Controllers
                 return RedirectToAction("Accueil", "Connexion");
             }
 
-            Jeu jeu = _context.jeux.Where(j => j.IDJeu == id).FirstOrDefault();
+            Jeu jeu = _context.jeux.Where(j => j.JeuID == id).FirstOrDefault();
 
             { 
                 ViewBag.NomDuJeu = jeu.NomDuJeu;
@@ -158,17 +159,14 @@ namespace TP3.Controllers
             bool contientJeu = false;
             
 
-            Utilisateur utilisateur = _context.utilisateurs.Where(u => u.IDUtilisateur == user.IDUtilisateur).FirstOrDefault();
+            Utilisateur utilisateur = _context.utilisateurs.Where(u => u.UtilisateurID == user.UtilisateurID).FirstOrDefault();
 
-            if (utilisateur.Favoris.Where(f => f.IDJeu == id).FirstOrDefault() != null)
+            if (utilisateur.Favoris.Where(f => f.JeuID == id).FirstOrDefault() != null)
             {
-                utilisateur.Favoris.Add(_context.jeux.Where(j => j.IDJeu == id).First());
+                utilisateur.Favoris.Add(_context.jeux.Where(j => j.JeuID == id).First());
             }
 
             _context.SaveChanges();
-
-
-        
 
             return RedirectToAction("FicheDeJeu", "Home", new {id=id});
         }
@@ -188,7 +186,7 @@ namespace TP3.Controllers
 
             Utilisateur user = JsonConvert.DeserializeObject<Utilisateur>(userString);
             
-            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.IDUtilisateur == user.IDUtilisateur).FirstOrDefault();
+            Utilisateur utilisateurModel = _context.utilisateurs.Where(u => u.UtilisateurID == user.UtilisateurID).FirstOrDefault();
             Jeu jeu = _context.jeux.Where(j => j.NomDuJeu == nomDuJeu).FirstOrDefault();
 
             utilisateurModel.Favoris.Remove(jeu);
