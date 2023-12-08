@@ -43,7 +43,7 @@ namespace TP2.Controllers
 
             if (trouve != null)
             {
-                this.HttpContext.Session.SetString("Utilisateur", u.UtilisateurID);
+                this.HttpContext.Session.SetString("Utilisateur",  JsonConvert.SerializeObject(u));
                 return RedirectToAction("Accueil", "Home");
             }
             else
@@ -55,7 +55,6 @@ namespace TP2.Controllers
         [HttpPost]
         public ActionResult CreerCompte(string identifiantUnique, string pseudo, string prenom, string nom, string password)
         {
-
            
             if (identifiantUnique == null || identifiantUnique == "")
             {
